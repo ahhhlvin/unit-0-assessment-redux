@@ -15,36 +15,48 @@ public class Unit0Exercises {
     public static void main (String args[]) {
         // Use main to test your methods
         print();
+        System.out.println(returnPrimitiveBooleanFalse());
+        System.out.println(returnPrimitiveInt55Plus44());
+        System.out.println(returnPrimitiveDouble2Point718());
+        System.out.println(isEven(20));
+        System.out.println(isMultipleOfX(28, 7));
+        System.out.println(returnSumOfOddNumbersBetween1And100());
+        System.out.println(stringSplit("ubiquitous", "q"));
+        changeJayZsLocationToLosAngeles(returnSingers());
+        System.out.println(returnSingers().get("Jay-Z").getLocation());
+        removeJepsenFromSingers(returnSingers());
+        System.out.println(returnSingers());
+        System.out.println(stringSplit("hello, how are you", "are"));
     }
 
     public static void print() {
         // print out "I'm sorry Dave, I'm afraid I can't let you do that."
-        System.out.println("");
+        System.out.println("I'm sorry Dave, I'm afraid I can't let you do that.");
     }
 
-    public static Object returnPrimitiveBooleanFalse() {
-        return null;
+    public static boolean returnPrimitiveBooleanFalse() {
+        return false;
     }
 
-    public static Object returnPrimitiveInt55Plus44() {
-        return null;
+    public static int returnPrimitiveInt55Plus44() {
+        return (55+44);
     }
 
-    public static Object returnPrimitiveDouble2Point718() {
+    public static double returnPrimitiveDouble2Point718() {
         // This is the start of a famous mathematical constant.
         // What's that constant?
-        return null;
+        return 2.718;
     }
 
-    public static Object returnPrimitiveCharASCII35() {
+    public static char returnPrimitiveCharASCII35() {
         // What's the character for the ASCII number 35?
         // Look at an ASCII table and return that character.
         // You can look at the ASCII table at http://www.asciitable.com/
-        return null;
+        return '#';
     }
 
     public static boolean isEven(int n) {
-        return false;
+        return (n % 2 == 0);
     }
 
     public static boolean isMultipleOfX(int n, int x) {
@@ -56,23 +68,52 @@ public class Unit0Exercises {
         //      isMultipleOfX(10, 3) == false
         //      isMultipleOfX(28, 7) == true
         // TODO expect a ArithmeticException in Test with x==0
-        return false;
+        if (n % x == 0) {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 
     public static int returnSumOfOddNumbersBetween1And100() {
         // Starts with [1, 3, 5, ...]
         // Ends with   [..., 95, 97, 99]
-      return 0;
+        int sum = 0;
+
+        for (int i = 1; i < 100; i++) {
+            if (i % 2 != 0)
+            {
+                sum += i;
+            } else {
+                continue;
+            }
+        }
+
+        return sum;
     }
 
+    // FIXME:
     public static int returnSumOfTheFirst200MultiplesOf3() {
         // Starts with [0, 3, 6, ...]
         // Ends with   [..., 591, 594, 597]
-      return 0;
+        int sum = 0;
+
+        for (int i = 0; i < 200; i++)
+        {
+            sum += (i * 3);
+        }
+
+      return sum;
     }
 
     public static boolean isEmptyString(String str) {
-        return false;
+        if (str.equals("")) {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 
     public static String alternateS1AndS2Xtimes(String s1, String s2, int x) {
@@ -84,7 +125,14 @@ public class Unit0Exercises {
         //      alternateS1AndS2Xtimes("abra", "cadabra", 1).equals("abracadabra") == true
         //      alternateS1AndS2Xtimes("abra", "cadabra", 2).equals("abracadabraabracadabra") == true
         //      alternateS1AndS2Xtimes("abra", "cadabra", 3).equals("abracadabraabracadabraabracadabra") == true
-        return "";
+        String str = "";
+        String combo = s1 + s2;
+
+        for (int i = 0; i < x; i++) {
+            str += combo;
+        }
+
+        return str;
     }
 
     public static String stringSplit(String s, String splitOn) {
@@ -94,12 +142,33 @@ public class Unit0Exercises {
         //      stringSplit("hellogoodbye", "good").equals("hello") == true
         //      stringSplit("fancy seeing you", "there").equals("") == true
         // If the string does not contain split, then return the empty string "".
-        return "";
+
+        ArrayList<String> words = new ArrayList<String>();
+        String str = "";
+
+        for (int i = 0; i < s.length(); i++) {
+
+            if (s.charAt(i) == splitOn.charAt(0)) {
+                break;
+            } else if (!s.contains(splitOn))
+            {
+                str = "";
+            } else
+            {
+                str += s.charAt(i);
+            }
+        }
+
+        return str;
+
     }
 
     public static Singer returnBeyonce() {
       // should return an instance of Singer with the name "Beyonce" and location "USA"
-      return null;
+
+        Singer yonce = new Singer("Beyonce", "USA");
+
+      return yonce;
     }
 
     public static Singer returnSingerChild(Singer s1, Singer s2) {
@@ -108,7 +177,10 @@ public class Unit0Exercises {
       //      Singer queenB = new Singer("Beyonce", "USA");
       //      Singer rihanna = new Singer("Rihanna", "Barbados");
       //      returnSingerChild(queenB, rihanna) ==> returns an instance of Singer with name "Beyonce" and location "Barbados".
-      return null;
+
+        Singer child = new Singer (s1.getName(), s2.getLocation());
+
+      return child;
     }
 
     public static HashMap<String, Singer> returnSingers() {
@@ -118,11 +190,27 @@ public class Unit0Exercises {
         //      key="Bieber",   Singer(name="Bieber",  location="Canada")
         //      key="Drake",    Singer(name="Drake",   location="Canada")
         //      key="Jepsen",   Singer(name="Jepsen",  location="Canada")
-        return null;
+
+        HashMap<String, Singer> singers = new HashMap<String, Singer>();
+
+        Singer beyonce = new Singer("Beyonce", "USA");
+        Singer jayz = new Singer("Jay-Z", "USA");
+        Singer bieber = new Singer("Bieber", "Canada");
+        Singer drake = new Singer("Drake", "Canada");
+        Singer jepsen = new Singer("Jepsen", "Canada");
+
+        singers.put("Beyonce", beyonce);
+        singers.put("Jay-Z", jayz);
+        singers.put("Bieber", bieber);
+        singers.put("Drake", drake);
+        singers.put("Jepsen", jepsen);
+
+
+        return singers;
     }
 
     public static boolean isFromCanada(Singer person) {
-        return false;
+        return (person.getLocation().equalsIgnoreCase("Canada"));
     }
 
     public static void changeJayZsLocationToLosAngeles(HashMap<String, Singer> people) {
@@ -132,6 +220,8 @@ public class Unit0Exercises {
         //      Singer(name="Jay-Z",   location="USA")
         // new value of Jay-Z:
         //      Singer(name="Jay-Z",   location="Los Angeles")
+
+        people.get("Jay-Z").setLocation("Los Angeles");
     }
 
     public static void removeJepsenFromSingers(HashMap<String, Singer> people){
@@ -141,20 +231,14 @@ public class Unit0Exercises {
         // new keys in `people`:
         //  ["Beyonce", "Jay-Z", "Bieber", "Drake"]
 
+        for (String singer : people.keySet())
+        {
+            if (singer.equals("Jepsen"))
+            {
+                people.remove(singer);
+            }
+        }
+
     }
 
-    // Bonus Problems
-    public static void readFileAndOnlyPrintCanadianCelebrities() {
-        // TODO Use Apache Commons CSV and provide boilerplate for reading the file
-        // https://commons.apache.org/proper/commons-csv/
-      try {
-        FileReader fr = new FileReader("celebrities.csv");
-      } catch (FileNotFoundException e) {
-        e.printStackTrace();
-      }
-    }
-
-    public static void readFileAndPrintCelebrityAges(){
-        // TODO similar as above
-    }
 }
